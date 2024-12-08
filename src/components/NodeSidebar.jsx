@@ -46,7 +46,7 @@ function NodeSidebar({ node, onClose, onSave, onDelete }) {
   };
 
   const handleSuccessStatusChange = (status) => {
-    setSuccessStatus(prev => 
+    setSuccessStatus(prev =>
       prev.includes(status)
         ? prev.filter(s => s !== status)
         : [...prev, status]
@@ -59,8 +59,8 @@ function NodeSidebar({ node, onClose, onSave, onDelete }) {
         <h2 className="text-xl font-semibold text-purple-700">
           {node.data.channelType?.toUpperCase()} Configuration
         </h2>
-        <button 
-          onClick={onClose} 
+        <button
+          onClick={onClose}
           className="text-purple-600 hover:text-purple-800"
         >
           Close
@@ -70,7 +70,7 @@ function NodeSidebar({ node, onClose, onSave, onDelete }) {
       <div className="space-y-4">
         <div>
           <label className="block text-purple-700 mb-2">Provider</label>
-          <select 
+          <select
             value={provider}
             onChange={(e) => setProvider(e.target.value)}
             className="w-full p-2 border rounded text-purple-700"
@@ -85,13 +85,16 @@ function NodeSidebar({ node, onClose, onSave, onDelete }) {
         <div>
           <label className="block text-purple-700 mb-2">Delay</label>
           <div className="flex">
-            <input 
-              type="number" 
-              value={delay}
-              onChange={(e) => setDelay(Number(e.target.value))}
+            <input
+              type="number"
+              value={delay === null ? '' : delay}  
+              onChange={(e) => {
+                const value = e.target.value;
+                setDelay(value === '' ? null : Number(value));  
+              }}
               className="w-full p-2 border rounded mr-2 text-purple-700"
             />
-            <select 
+            <select
               value={unit}
               onChange={(e) => setUnit(e.target.value)}
               className="p-2 border rounded text-purple-700"
@@ -109,11 +112,10 @@ function NodeSidebar({ node, onClose, onSave, onDelete }) {
               <button
                 key={status}
                 onClick={() => handleSuccessStatusChange(status)}
-                className={`px-2 py-1 rounded ${
-                  successStatus.includes(status)
+                className={`px-2 py-1 rounded ${successStatus.includes(status)
                     ? 'bg-purple-600 text-white'
                     : 'bg-purple-200 text-purple-700'
-                }`}
+                  }`}
               >
                 {status}
               </button>
@@ -122,13 +124,13 @@ function NodeSidebar({ node, onClose, onSave, onDelete }) {
         </div>
 
         <div className="flex space-x-2">
-          <button 
+          <button
             onClick={handleSave}
             className="flex-grow py-2 bg-purple-600 text-white rounded hover:bg-purple-700 transition"
           >
             Save Configuration
           </button>
-          <button 
+          <button
             onClick={() => onDelete(node.id)}
             className="py-2 px-4 bg-red-500 text-white rounded hover:bg-red-600 transition"
           >
