@@ -25,7 +25,7 @@ const initialNodes = [
   }
 ];
 
-function WorkflowBuilder() {
+function WorkflowBuilder({ routingName }) {
   const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
   const [edges, setEdges, onEdgesChange] = useEdgesState([]);
   const [selectedNode, setSelectedNode] = useState(null);
@@ -98,7 +98,6 @@ function WorkflowBuilder() {
     };
 
     nodes.forEach(node => {
-      console.log("Each node", node)
       if (node.data.configuration && node.id !== 'branch_0') {
         const config = node.data.configuration;
         const connectingEdges = edges.filter(edge => edge.source === node.id);
@@ -142,19 +141,16 @@ function WorkflowBuilder() {
     // Create final payload
     const payload = {
       routing_id: 'RU1B78F7F3',
-      routing_name: 'life_time_exchange_common_routing',
+      routing_name: routingName,
       routing_description: '',
       channel_id: 'CROSSCHNL',
       json_data: { workflow },
     };
 
     console.log('Final Workflow Payload:', JSON.stringify(payload, null, 2));
+    console.log('Alert:', JSON.stringify(payload, null, 2));
     return payload;
   };
-
-  console.log("edges", edges);
-  console.log("nodes", nodes);
-
 
   return (
     <div className="flex flex-col h-screen">
@@ -170,7 +166,7 @@ function WorkflowBuilder() {
 
       <div className="flex flex-grow">
         <div className="w-64 bg-purple-50 p-4 border-r border-purple-200">
-          <h2 className="text-xl font-semibold text-purple-700 mb-4">Channels</h2>
+          <h2 className="text-xl font-semibold text-purple-700 mb-4">Add Channels</h2>
           <div className="space-y-2">
             {['whatsapp', 'sms', 'email'].map((channel) => (
               <button

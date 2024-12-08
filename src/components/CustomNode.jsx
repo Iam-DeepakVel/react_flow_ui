@@ -27,26 +27,26 @@ function CustomNode({ data }) {
 
   return (
     <div className="bg-purple-600 text-white p-4 rounded-lg shadow-md">
-      <Handle 
-        type="target" 
-        position={Position.Top} 
-        style={{ background: '#9333ea' }} 
-      />
+      {data.label !== "Start" && <Handle
+        type="target"
+        position={Position.Top}
+        style={{ background: '#9333ea' }}
+      />}
       <div className="text-center">
         {renderNodeContent()}
       </div>
-      <Handle 
-        type="source" 
-        position={Position.Bottom} 
-        id="success" 
-        style={{ background: 'green' }} 
+      <Handle
+        type="source"
+        position={Position.Bottom}
+        id="success"
+        style={{ background: 'green' }}
       />
-      <Handle 
-        type="source" 
-        position={Position.Right} 
-        id="failure" 
-        style={{ background: 'red' }} 
-      />
+      {data.label !== "Start" && <Handle
+        type="source"
+        position={Position.Right}
+        id="failure"
+        style={{ background: 'red' }}
+      />}
     </div>
   );
 }

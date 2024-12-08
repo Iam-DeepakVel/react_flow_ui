@@ -6,11 +6,11 @@ import DashboardLayout from './common/DashboardLayout';
 import Dashboard from './containers/Dashboard'; // import your Analytics component
 import RoutingList from './containers/RoutingList'; // import your RoutingList component
 import NotFound from './common/NotFound'; // import your NotFound component
-import WorkflowBuilder from './containers/WorkflowBuilder';
 import TemplateList from './containers/TemplateList';
 import EventList from './containers/EventList';
-import Template from './containers/Template';
 import CreateTemplate from './containers/CreateTemplate'
+import CreateEvent from './containers/CreateEvent';
+import CreateRouting from './containers/CreateRouting';
 
 
 function App() {
@@ -42,10 +42,30 @@ function App() {
             </DashboardLayout>
           } />
 
+          <Route path="/events/create" element={
+            <DashboardLayout>
+              <CreateEvent />
+            </DashboardLayout>
+          } />
+
+          <Route path="/events/:id" element={
+            <DashboardLayout>
+              <CreateEvent />
+            </DashboardLayout>
+          } />
+
+          <Route path="/routings/create" element={
+            <DashboardLayout>
+              <ReactFlowProvider>
+                <CreateRouting />
+              </ReactFlowProvider>
+            </DashboardLayout>
+          } />
+
           <Route path="/routings/:id" element={
             <DashboardLayout>
               <ReactFlowProvider>
-                <WorkflowBuilder />
+                <CreateRouting />
               </ReactFlowProvider>
             </DashboardLayout>
           } />
@@ -58,7 +78,7 @@ function App() {
 
           <Route path="/templates/:id" element={
             <DashboardLayout>
-              <Template />
+              <CreateTemplate />
             </DashboardLayout>
           } />
 

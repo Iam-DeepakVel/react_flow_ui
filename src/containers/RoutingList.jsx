@@ -1,5 +1,6 @@
 import { IoGitNetworkSharp } from "react-icons/io5";
 import Heading from "../components/Heading";
+import { Link } from "react-router-dom";
 
 const workflows = [
   {
@@ -26,12 +27,12 @@ export default function RoutingList() {
     <div>
       <div className="flex items-center justify-between">
         <Heading title="Routings" subTitle="List of workflows!" icon={IoGitNetworkSharp} />
-        <button
-          type="button"
+        <Link
+          to="/routings/create"
           className="rounded-full bg-indigo-600 px-4 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
         >
           Create Routing
-        </button>
+        </Link>
       </div>
       <ul
         role="list"
